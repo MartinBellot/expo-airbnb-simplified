@@ -48,4 +48,115 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# REACT_AIRBNB_LIKE
+# 🏠 NomadNest - Ultra Modern Travel App
+
+<div align="center">
+  <h3>A next-generation property rental platform with Apple-inspired design</h3>
+  <p>Built with React Native, Expo, and TypeScript</p>
+</div>
+
+## ✨ Features
+
+- 🎨 **Ultra Modern UI** - Sleek dark theme with neon green accents
+- 🌟 **Glassmorphism Effects** - Beautiful blur effects throughout the app
+- 🎭 **Smooth Animations** - Fluid animations powered by Reanimated
+- 📱 **Responsive Design** - Optimized for all screen sizes
+- 🏗️ **Clean Architecture** - Modular components and typed data models
+- 🎯 **Type Safety** - Full TypeScript support
+
+## 🎨 Design System
+
+### Color Palette
+- **Primary**: Electric Neon Green (`#00FF94`)
+- **Background**: Pure Black (`#000000`)
+- **Text**: White & Gray scale
+- **Accents**: Gradient greens for CTAs
+
+### Components
+- `Header` - Glassmorphic header with search bar
+- `CategoryList` - Horizontal scrollable category chips
+- `PropertyCard` - Beautiful property cards with images and ratings
+- `InspirationBanner` - Gradient CTA banner
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- Expo CLI
+- iOS Simulator or Android Emulator (optional)
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Start the development server
+npx expo start
+```
+
+### Run on Device
+1. Install Expo Go on your phone
+2. Scan the QR code from the terminal
+3. Enjoy NomadNest! 🎉
+
+## 📁 Project Structure
+
+```
+nomadnest/
+├── app/                    # App screens
+│   └── (tabs)/            # Tab navigation
+│       └── index.tsx      # Home screen
+├── components/            # Reusable components
+│   └── home/             # Home screen components
+│       ├── Header.tsx
+│       ├── CategoryList.tsx
+│       ├── PropertyCard.tsx
+│       └── InspirationBanner.tsx
+├── constants/            # App constants
+│   ├── colors.ts        # Color system
+│   └── data.ts          # Mock data
+├── types/               # TypeScript types
+│   └── property.ts      # Property models
+└── assets/              # Images and fonts
+```
+
+## 🛠️ Technologies
+
+- **React Native** - Mobile framework
+- **Expo** - Development platform
+- **TypeScript** - Type safety
+- **Reanimated** - Advanced animations
+- **Expo Blur** - Glassmorphism effects
+- **Expo Linear Gradient** - Beautiful gradients
+- **Expo Image** - Optimized image loading
+
+## 📱 Screenshots
+
+> Coming soon...
+
+## 🎯 Roadmap
+
+- [ ] Property detail screen
+- [ ] Search functionality
+- [ ] User authentication
+- [ ] Favorites system
+- [ ] Booking flow
+- [ ] User profile
+- [ ] Map integration
+- [ ] Reviews & ratings
+
+## 👨‍💻 Author
+
+Built with ❤️ by Martin
+
+## 📄 License
+
+MIT License - feel free to use this project for learning!
+
+---
+
+<div align="center">
+  <p>⭐ Star this repo if you like it!</p>
+</div>
+

@@ -1,19 +1,19 @@
 {
   "expo": {
-    "name": "AIRBNB_LIKE",
-    "slug": "AIRBNB_LIKE",
+    "name": "NomadNest",
+    "slug": "nomadnest",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "airbnblike",
-    "userInterfaceStyle": "automatic",
+    "scheme": "nomadnest",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#000000",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
