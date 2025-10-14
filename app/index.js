@@ -4,7 +4,7 @@ import InspirationBanner from '@/components/home/InspirationBanner';
 import PropertyCard from '@/components/home/PropertyCard';
 import { COLORS } from '@/constants/colors';
 import { PROPERTIES } from '@/constants/data';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Platform, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
@@ -23,6 +23,7 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
+        
         {/* SIZEDBOX:*/}
         <View style={{ height: 50 }} />
         {/* Categories Component */}

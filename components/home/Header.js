@@ -1,8 +1,7 @@
 import { APP_NAME, COLORS } from '@/constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
-import React from 'react';
-import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
 export default function Header() {
@@ -13,7 +12,15 @@ export default function Header() {
     >
       <BlurView intensity={80} tint="dark" style={styles.headerBlur}>
         <View style={styles.headerContent}>
-          <Text style={styles.logo}>{APP_NAME}</Text>
+        
+          <View style={styles.logoContainer}>
+            <Image 
+              source={require('@/assets/images/logo.png')} 
+              style={styles.logoImage}
+              resizeMode="contain"
+            />
+            <Text style={styles.logo}>{APP_NAME}</Text>
+          </View>
           <TouchableOpacity style={styles.profileButton}>
             <Ionicons name="person-circle-outline" size={32} color={COLORS.textPrimary} />
           </TouchableOpacity>
@@ -54,6 +61,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingTop: 10,
+  },
+  logoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  logoImage: {
+    width: 32,
+    height: 32,
   },
   logo: {
     fontSize: 24,

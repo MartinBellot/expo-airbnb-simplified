@@ -3,12 +3,30 @@ import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
 const { width } = Dimensions.get('window');
 
 export default function PropertyCard({ property, index }) {
+  const router = useRouter();
+
+  const handlePress = () => {
+    router.push({
+      pathname: '/property-detail',
+      params: {
+        id: property.id,
+        title: property.title,
+        location: property.location,
+        price: property.price,
+        rating: property.rating,
+        image: property.image,
+        isNew: property.isNew,
+      }
+    });
+  };
+
   return (
     <Animated.View
       entering={FadeInDown.delay(500 + index * 100).duration(600).springify()}
@@ -17,6 +35,7 @@ export default function PropertyCard({ property, index }) {
       <TouchableOpacity 
         style={styles.propertyCard}
         activeOpacity={0.9}
+        onPress={handlePress}
       >
         <View style={styles.imageContainer}>
           <Image

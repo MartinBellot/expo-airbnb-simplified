@@ -1,4 +1,4 @@
-# 🏗️ NomadNest Architecture
+# 🏗️ Airbrb Architecture
 
 ## 📐 Code Organization
 

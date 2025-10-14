@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "NomadNest",
-    "slug": "nomadnest",
+    "name": "Airbrb",
+    "slug": "airbrb",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "nomadnest",
+    "scheme": "airbrb",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "ios": {

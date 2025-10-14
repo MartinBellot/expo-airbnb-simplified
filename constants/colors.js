@@ -1,4 +1,4 @@
-// NomadNest Color Palette - Ultra Modern Green Theme
+// Airbrb Color Palette - Ultra Modern Green Theme
 export const COLORS = {
   // Primary Brand Colors
   primary: '#00FF94', // Electric Neon Green
@@ -32,4 +32,4 @@ export const COLORS = {
   divider: 'rgba(255, 255, 255, 0.05)',
 };
 
-export const APP_NAME = 'NomadNest';
+export const APP_NAME = 'Airbrb';

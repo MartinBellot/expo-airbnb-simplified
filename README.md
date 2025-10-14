@@ -48,7 +48,7 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# 🏠 NomadNest - Ultra Modern Travel App
+# 🏠 Airbrb - Ultra Modern Travel App
 
 <div align="center">
   <h3>A next-generation property rental platform with Apple-inspired design</h3>
@@ -98,12 +98,12 @@ npx expo start
 ### Run on Device
 1. Install Expo Go on your phone
 2. Scan the QR code from the terminal
-3. Enjoy NomadNest! 🎉
+3. Enjoy Airbrb! 🎉
 
 ## 📁 Project Structure
 
 ```
-nomadnest/
+airbrb/
 ├── app/                    # App screens
 │   └── (tabs)/            # Tab navigation
 │       └── index.tsx      # Home screen
