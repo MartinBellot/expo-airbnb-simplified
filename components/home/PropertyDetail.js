@@ -171,7 +171,7 @@ export default function PropertyDetail() {
         entering={FadeInUp.delay(600).duration(600)}
         style={styles.footer}
       >
-        <BlurView intensity={80} tint="light" style={styles.footerBlur}>
+        <BlurView intensity={20} tint="light" style={styles.footerBlur}>
           <View style={styles.footerContent}>
             <View style={styles.priceSection}>
               <Text style={styles.priceValue}>${property.price}</Text>

@@ -23,7 +23,6 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        
         {/* SIZEDBOX:*/}
         <View style={{ height: 50 }} />
         {/* Categories Component */}
