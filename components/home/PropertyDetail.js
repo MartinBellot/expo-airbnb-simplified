@@ -13,7 +13,6 @@ export default function PropertyDetail() {
   const params = useLocalSearchParams();
   const router = useRouter();
   
-  // Reconstruction de l'objet property depuis les params
   const property = {
     id: params.id,
     title: params.title,

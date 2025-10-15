@@ -1,8 +1,9 @@
+//TABS LAYOUT:
 import { COLORS } from '@/constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 
-export default function TabLayout() {
+export default function SandboxTabsLayout() {
   return (
     <Tabs
       screenOptions={{
@@ -23,26 +24,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="tabs-screen-2"
         options={{
-          title: 'Explore',
+          title: 'Screen 2',
           tabBarIcon: ({ color }) => <Ionicons name="search" size={24} color={color} />,
         }}
       />
-      <Tabs.Screen
-        name="property-detail"
-        options={{
-          href: null, // Cache cette route de la bottom bar
-        }}
-        
-      />
-      <Tabs.Screen
-        name="(sandbox)"
-        options={{
-          title: 'Sandbox',
-          tabBarIcon: ({ color }) => <Ionicons name="flask" size={24} color={color} />,
-        }}
-      />
+      
     </Tabs>
   );
 }

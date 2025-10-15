@@ -32,9 +32,10 @@ export default function PropertyCard({ property, index }) {
       entering={FadeInDown.delay(500 + index * 100).duration(600).springify()}
       style={styles.propertyCardWrapper}
     >
+
       <TouchableOpacity 
         style={styles.propertyCard}
-        activeOpacity={0.9}
+        activeOpacity={0.8}
         onPress={handlePress}
       >
         <View style={styles.imageContainer}>
