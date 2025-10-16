@@ -27,19 +27,19 @@ Contains all screen-level components using Expo Router's file-based routing.
 ```typescript
 app/
   _layout.js              // Root Stack layout
-  property-detail.js      // Property detail screen (outside tabs)
   (tabs)/
     _layout.js            // Tabs navigation layout
     index.js              // Home screen (main feed)
     explore.js            // Explore screen
+    property-detail.js    // Modal screen for property details (hidden from tab bar)
     (sandbox)/            // Sandbox for testing navigation patterns
 ```
 
 **Architecture Benefits:**
-- Clear separation: tabs navigation vs. full-screen pages
-- No need to hide routes (property-detail is naturally outside tabs)
-- Clean and intuitive structure
-- Easy to add new tabs or stack screens
+- All related screens grouped in `(tabs)/`
+- Modal presentation for property details (slides from bottom)
+- No need for separate stack navigation at root level
+- Clean, intuitive structure with logical grouping
 
 ### `/components` - Reusable Components
 Organized by feature/domain for better scalability.

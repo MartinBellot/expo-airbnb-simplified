@@ -30,6 +30,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="property-detail"
+        options={{
+          href: null, // Cache cette route de la tab bar
+          presentation: 'modal',
+        }}
+      />
+      <Tabs.Screen
         name="(sandbox)"
         options={{
           title: 'Sandbox',

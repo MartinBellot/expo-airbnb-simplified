@@ -14,7 +14,7 @@ export default function PropertyCard({ property, index }) {
 
   const handlePress = () => {
     router.push({
-      pathname: '/property-detail',
+      pathname: '/(tabs)/property-detail',
       params: {
         id: property.id,
         title: property.title,

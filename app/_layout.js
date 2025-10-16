@@ -12,13 +12,6 @@ export default function RootLayout() {
           headerShown: false,
         }}
       />
-      <Stack.Screen 
-        name="property-detail"
-        options={{
-          presentation: 'card',
-          headerShown: false,
-        }}
-      />
     </Stack>
   );
 }
