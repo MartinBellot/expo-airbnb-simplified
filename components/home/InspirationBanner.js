@@ -1,17 +1,21 @@
 import { COLORS } from '@/constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
+import { useRouter } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
 export default function InspirationBanner() {
+  const router = useRouter();
+  const { theme, isDarkMode } = useTheme();
+
   return (
     <Animated.View 
       entering={FadeInDown.delay(900).duration(600).springify()}
       style={styles.inspirationSection}
     >
-      <Text style={styles.sectionTitle}>Inspiration for your next trip</Text>
+      <Text style={[styles.sectionTitle, { color: theme.textPrimary }]}>Inspiration for your next trip</Text>
       <View style={styles.inspirationCard}>
         <LinearGradient
           colors={[COLORS.accentGradientStart, COLORS.accentGradientMiddle, COLORS.accentGradientEnd]}
@@ -23,7 +27,7 @@ export default function InspirationBanner() {
           <Text style={styles.inspirationSubtitle}>
             Find unique stays and experiences around the world
           </Text>
-          <TouchableOpacity style={styles.inspirationButton}>
+          <TouchableOpacity style={styles.inspirationButton} onPress={() => router.push('/(tabs)/explore')}>
             <Text style={styles.inspirationButtonText}>Explore Now</Text>
             <Ionicons name="arrow-forward" size={18} color={COLORS.background} />
           </TouchableOpacity>
@@ -41,7 +45,6 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: '700',
-    color: COLORS.textPrimary,
     letterSpacing: -0.5,
   },
   inspirationCard: {

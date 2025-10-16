@@ -25,7 +25,12 @@ export default function HomeScreen() {
         contentContainerStyle={styles.scrollContent}
       >
         {/* SIZEDBOX:*/}
+        <View style={{ height: 30 }} />
+        {/* Inspiration Banner Component */}
+        <InspirationBanner />
+
         <View style={{ height: 50 }} />
+
         {/* Categories Component */}
         <CategoryList 
           selectedCategory={selectedCategory}
@@ -57,8 +62,6 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* Inspiration Banner Component */}
-        <InspirationBanner />
       </ScrollView>
     </View>
   );
