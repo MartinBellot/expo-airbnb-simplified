@@ -1,48 +1,24 @@
-import { COLORS } from '@/constants/colors';
-import { Ionicons } from '@expo/vector-icons';
-import { Tabs } from 'expo-router';
+import { Stack } from 'expo-router';
 
-export default function TabLayout() {
+export default function RootLayout() {
   return (
-    <Tabs
+    <Stack
       screenOptions={{
-        tabBarActiveTintColor: COLORS.primary,
-        tabBarInactiveTintColor: COLORS.textSecondary,
         headerShown: false,
-        tabBarStyle: {
-          backgroundColor: COLORS.background,
-          borderTopColor: COLORS.border,
-          borderTopWidth: 1,
-        },
       }}>
-      <Tabs.Screen
-        name="index"
+      <Stack.Screen 
+        name="(tabs)" 
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <Ionicons name="home" size={24} color={color} />,
+          headerShown: false,
         }}
       />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <Ionicons name="search" size={24} color={color} />,
-        }}
-      />
-      <Tabs.Screen
+      <Stack.Screen 
         name="property-detail"
         options={{
-          href: null, // Cache cette route de la bottom bar
-        }}
-        
-      />
-      <Tabs.Screen
-        name="(sandbox)"
-        options={{
-          title: 'Sandbox',
-          tabBarIcon: ({ color }) => <Ionicons name="flask" size={24} color={color} />,
+          presentation: 'card',
+          headerShown: false,
         }}
       />
-    </Tabs>
+    </Stack>
   );
 }

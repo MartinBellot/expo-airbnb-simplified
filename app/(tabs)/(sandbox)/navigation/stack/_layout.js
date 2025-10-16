@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-import { COLORS } from '../../../../constants/colors';
+import { COLORS } from '../../../../../constants/colors';
 
 export default function SandboxStackLayout() {
    

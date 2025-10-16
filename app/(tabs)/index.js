@@ -1,7 +1,7 @@
+import Header from '@/components/common/Header';
 import CategoryList from '@/components/home/CategoryList';
-import Header from '@/components/home/Header';
 import InspirationBanner from '@/components/home/InspirationBanner';
-import PropertyCard from '@/components/home/PropertyCard';
+import PropertyCard from '@/components/property/PropertyCard';
 import { COLORS } from '@/constants/colors';
 import { PROPERTIES } from '@/constants/data';
 import { useState } from 'react';
@@ -100,4 +100,3 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 });
-
