@@ -47,6 +47,12 @@ export default function SandboxScreen() {
       icon: 'menu',
       route: '/(sandbox)/navigation/drawer',
     },
+    {
+      title: 'Compteur useState',
+      description: 'Exemple simple d\'utilisation du hook useState',
+      icon: 'calculator',
+      route: '/(sandbox)/counter',
+    },
   ];
 
   return (

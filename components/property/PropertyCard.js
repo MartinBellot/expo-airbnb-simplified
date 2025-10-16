@@ -1,4 +1,4 @@
-import { COLORS } from '@/constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import { Image } from 'expo-image';
@@ -11,6 +11,7 @@ const { width } = Dimensions.get('window');
 
 export default function PropertyCard({ property, index }) {
   const router = useRouter();
+  const { theme, isDarkMode } = useTheme();
 
   const handlePress = () => {
     router.push({
@@ -34,7 +35,13 @@ export default function PropertyCard({ property, index }) {
     >
 
       <TouchableOpacity 
-        style={styles.propertyCard}
+        style={[
+          styles.propertyCard,
+          { 
+            backgroundColor: theme.surface,
+            borderColor: theme.border 
+          }
+        ]}
         activeOpacity={0.8}
         onPress={handlePress}
       >
@@ -50,35 +57,44 @@ export default function PropertyCard({ property, index }) {
           />
           
           {property.isNew && (
-            <View style={styles.newBadge}>
-              <Text style={styles.newBadgeText}>NEW</Text>
+            <View style={[styles.newBadge, { backgroundColor: theme.primary }]}>
+              <Text style={[
+                styles.newBadgeText, 
+                { color: isDarkMode ? theme.textPrimary : '#FFFFFF' }
+              ]}>
+                NEW
+              </Text>
             </View>
           )}
           
           <TouchableOpacity style={styles.favoriteButton}>
-            <BlurView intensity={60} tint="dark" style={styles.favoriteBlur}>
-              <Ionicons name="heart-outline" size={20} color={COLORS.textPrimary} />
+            <BlurView intensity={60} tint={isDarkMode ? 'dark' : 'light'} style={styles.favoriteBlur}>
+              <Ionicons name="heart-outline" size={20} color={theme.textPrimary} />
             </BlurView>
           </TouchableOpacity>
 
           <View style={styles.ratingBadge}>
-            <BlurView intensity={60} tint="dark" style={styles.ratingBlur}>
-              <Ionicons name="star" size={14} color={COLORS.warning} />
-              <Text style={styles.ratingText}>{property.rating}</Text>
+            <BlurView intensity={60} tint={isDarkMode ? 'dark' : 'light'} style={styles.ratingBlur}>
+              <Ionicons name="star" size={14} color={theme.warning} />
+              <Text style={[styles.ratingText, { color: theme.textPrimary }]}>
+                {property.rating}
+              </Text>
             </BlurView>
           </View>
         </View>
 
         <View style={styles.propertyInfo}>
-          <Text style={styles.propertyTitle} numberOfLines={1}>
+          <Text style={[styles.propertyTitle, { color: theme.textPrimary }]} numberOfLines={1}>
             {property.title}
           </Text>
-          <Text style={styles.propertyLocation} numberOfLines={1}>
+          <Text style={[styles.propertyLocation, { color: theme.textSecondary }]} numberOfLines={1}>
             {property.location}
           </Text>
           <View style={styles.priceContainer}>
-            <Text style={styles.propertyPrice}>${property.price}</Text>
-            <Text style={styles.priceLabel}> / night</Text>
+            <Text style={[styles.propertyPrice, { color: theme.textPrimary }]}>
+              ${property.price}
+            </Text>
+            <Text style={[styles.priceLabel, { color: theme.textSecondary }]}> / night</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -92,10 +108,8 @@ const styles = StyleSheet.create({
   },
   propertyCard: {
     borderRadius: 20,
-    backgroundColor: COLORS.surface,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: COLORS.border,
   },
   imageContainer: {
     width: '100%',
@@ -117,13 +131,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 12,
     left: 12,
-    backgroundColor: COLORS.primary,
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 8,
   },
   newBadgeText: {
-    color: COLORS.background,
     fontSize: 11,
     fontWeight: '700',
     letterSpacing: 0.5,
@@ -158,7 +170,6 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
   ratingText: {
-    color: COLORS.textPrimary,
     fontSize: 13,
     fontWeight: '700',
   },
@@ -168,12 +179,10 @@ const styles = StyleSheet.create({
   propertyTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: COLORS.textPrimary,
     marginBottom: 4,
   },
   propertyLocation: {
     fontSize: 13,
-    color: COLORS.textSecondary,
     marginBottom: 8,
   },
   priceContainer: {
@@ -183,11 +192,9 @@ const styles = StyleSheet.create({
   propertyPrice: {
     fontSize: 18,
     fontWeight: '700',
-    color: COLORS.textPrimary,
   },
   priceLabel: {
     fontSize: 13,
-    color: COLORS.textSecondary,
     fontWeight: '500',
   },
 });

@@ -1,16 +1,24 @@
-import { APP_NAME, COLORS } from '@/constants/colors';
+import { APP_NAME } from '@/constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import ThemeToggleButton from './ThemeToggleButton';
 
 export default function Header() {
+  const { theme, isDarkMode } = useTheme();
+  
   return (
     <Animated.View 
       entering={FadeInDown.duration(600).springify()}
       style={styles.header}
     >
-      <BlurView intensity={80} tint="dark" style={styles.headerBlur}>
+      <BlurView 
+        intensity={80} 
+        tint={isDarkMode ? 'dark' : 'light'} 
+        style={[styles.headerBlur, { borderBottomColor: theme.border }]}
+      >
         <View style={styles.headerContent}>
         
           <View style={styles.logoContainer}>
@@ -19,19 +27,35 @@ export default function Header() {
               style={styles.logoImage}
               resizeMode="contain"
             />
-            <Text style={styles.logo}>{APP_NAME}</Text>
+            <Text style={[styles.logo, { color: theme.primary }]}>{APP_NAME}</Text>
           </View>
-          <TouchableOpacity style={styles.profileButton}>
-            <Ionicons name="person-circle-outline" size={32} color={COLORS.textPrimary} />
-          </TouchableOpacity>
+          
+          <View style={styles.rightContainer}>
+            <ThemeToggleButton style={styles.themeButton} />
+            <TouchableOpacity style={styles.profileButton}>
+              <Ionicons name="person-circle-outline" size={32} color={theme.textPrimary} />
+            </TouchableOpacity>
+          </View>
         </View>
 
         <TouchableOpacity style={styles.searchContainer}>
-          <View style={styles.searchBar}>
-            <Ionicons name="search" size={20} color={COLORS.textSecondary} />
-            <Text style={styles.searchPlaceholder}>Where to?</Text>
-            <View style={styles.filterButton}>
-              <Ionicons name="options-outline" size={18} color={COLORS.textPrimary} />
+          <View style={[
+            styles.searchBar, 
+            { 
+              backgroundColor: theme.surface, 
+              borderColor: theme.border 
+            }
+          ]}>
+            <Ionicons name="search" size={20} color={theme.textSecondary} />
+            <Text style={[styles.searchPlaceholder, { color: theme.textSecondary }]}>
+              Where to?
+            </Text>
+            <View style={[styles.filterButton, { backgroundColor: theme.primary }]}>
+              <Ionicons 
+                name="options-outline" 
+                size={18} 
+                color={isDarkMode ? theme.textPrimary : '#FFFFFF'} 
+              />
             </View>
           </View>
         </TouchableOpacity>
@@ -53,7 +77,6 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'ios' ? 60 : 40,
     overflow: 'hidden',
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.border,
   },
   headerContent: {
     flexDirection: 'row',
@@ -74,8 +97,16 @@ const styles = StyleSheet.create({
   logo: {
     fontSize: 24,
     fontWeight: '700',
-    color: COLORS.primary,
     letterSpacing: -0.5,
+  },
+  rightContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  themeButton: {
+    width: 40,
+    height: 40,
   },
   profileButton: {
     width: 40,
@@ -90,25 +121,21 @@ const styles = StyleSheet.create({
   searchBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.surface,
     borderRadius: 30,
     paddingHorizontal: 20,
     paddingVertical: 14,
     borderWidth: 1,
-    borderColor: COLORS.border,
   },
   searchPlaceholder: {
     flex: 1,
     marginLeft: 12,
     fontSize: 16,
-    color: COLORS.textSecondary,
     fontWeight: '500',
   },
   filterButton: {
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: COLORS.primary,
     justifyContent: 'center',
     alignItems: 'center',
   },

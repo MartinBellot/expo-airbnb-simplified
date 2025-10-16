@@ -2,18 +2,19 @@ import Header from '@/components/common/Header';
 import CategoryList from '@/components/home/CategoryList';
 import InspirationBanner from '@/components/home/InspirationBanner';
 import PropertyCard from '@/components/property/PropertyCard';
-import { COLORS } from '@/constants/colors';
 import { PROPERTIES } from '@/constants/data';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useState } from 'react';
 import { Platform, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
 export default function HomeScreen() {
   const [selectedCategory, setSelectedCategory] = useState('1');
+  const { theme, isDarkMode } = useTheme();
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="light-content" />
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       
       {/* Header Component */}
       <Header />
@@ -37,9 +38,11 @@ export default function HomeScreen() {
             entering={FadeInDown.delay(400).duration(600).springify()}
             style={styles.sectionHeader}
           >
-            <Text style={styles.sectionTitle}>Featured Stays</Text>
+            <Text style={[styles.sectionTitle, { color: theme.textPrimary }]}>
+              Featured Stays
+            </Text>
             <TouchableOpacity>
-              <Text style={styles.seeAllText}>See all</Text>
+              <Text style={[styles.seeAllText, { color: theme.primary }]}>See all</Text>
             </TouchableOpacity>
           </Animated.View>
 
@@ -64,7 +67,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
   },
   scrollView: {
     flex: 1,
@@ -85,13 +87,11 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: '700',
-    color: COLORS.textPrimary,
     letterSpacing: -0.5,
   },
   seeAllText: {
     fontSize: 16,
     fontWeight: '600',
-    color: COLORS.primary,
   },
   propertiesGrid: {
     flexDirection: 'row',

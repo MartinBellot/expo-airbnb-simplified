@@ -1,9 +1,12 @@
 import { COLORS } from '@/constants/colors';
 import { CATEGORIES } from '@/constants/data';
+import { useTheme } from '@/contexts/ThemeContext';
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Animated, { FadeInDown, FadeInRight } from 'react-native-reanimated';
 
 export default function CategoryList({ selectedCategory, onSelectCategory }) {
+  const { theme, isDarkMode } = useTheme();
+  
   return (
     <Animated.View entering={FadeInDown.delay(200).duration(600).springify()}>
       <ScrollView 
@@ -26,8 +29,8 @@ export default function CategoryList({ selectedCategory, onSelectCategory }) {
             >
               <Text style={styles.categoryIcon}>{category.icon}</Text>
               <Text style={[
-                styles.categoryName,
-                selectedCategory === category.id && styles.categoryNameActive
+                styles.categoryName, {color: theme.textSecondary},
+                selectedCategory === category.id && { color: theme.textPrimary }
               ]}>
                 {category.name}
               </Text>
@@ -68,9 +71,5 @@ const styles = StyleSheet.create({
   categoryName: {
     fontSize: 15,
     fontWeight: '600',
-    color: COLORS.textSecondary,
-  },
-  categoryNameActive: {
-    color: COLORS.textPrimary,
   },
 });
