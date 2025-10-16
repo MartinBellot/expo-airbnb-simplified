@@ -1,4 +1,5 @@
 import { COLORS } from '@/constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import { Image } from 'expo-image';
@@ -12,6 +13,7 @@ const { width, height } = Dimensions.get('window');
 export default function PropertyDetail() {
   const params = useLocalSearchParams();
   const router = useRouter();
+  const { theme, isDarkMode } = useTheme();
   
   const property = {
     id: params.id,
@@ -38,7 +40,7 @@ export default function PropertyDetail() {
             contentFit="cover"
           />
           <LinearGradient
-            colors={['rgba(0,0,0,0.6)', 'transparent', 'transparent']}
+            colors={ isDarkMode ? ['rgba(0,0,0,0.6)', 'transparent', 'transparent'] : ['transparent', 'transparent', 'transparent']}
             style={styles.topGradient}
           />
           

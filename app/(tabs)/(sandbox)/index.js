@@ -53,6 +53,12 @@ export default function SandboxScreen() {
       icon: 'calculator',
       route: '/(sandbox)/counter',
     },
+    {
+      title: 'Todo List',
+      description: 'Gestion des tâches avec Zustand Store',
+      icon: 'list',
+      route: '/(sandbox)/todolist',
+    },
   ];
 
   return (
