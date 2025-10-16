@@ -49,6 +49,7 @@ export default function TabLayout() {
         name="(sandbox)"
         options={{
           title: 'Sandbox',
+          href: null, // Cache cette route de la tab bar
           tabBarIcon: ({ color }) => <Ionicons name="flask" size={24} color={color} />,
         }}
       />

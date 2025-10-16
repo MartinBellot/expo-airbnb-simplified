@@ -2,12 +2,14 @@ import { APP_NAME } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
+import { useRouter } from 'expo-router';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import ThemeToggleButton from './ThemeToggleButton';
 
 export default function Header() {
   const { theme, isDarkMode } = useTheme();
+  const router = useRouter();
   
   return (
     <Animated.View 
@@ -38,7 +40,11 @@ export default function Header() {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.searchContainer}>
+        <TouchableOpacity 
+          style={styles.searchContainer}
+          onPress={() => router.push('/(tabs)/explore')}
+          activeOpacity={0.7}
+        >
           <View style={[
             styles.searchBar, 
             { 

@@ -1,14 +1,190 @@
+import EmptyState from '@/components/explore/EmptyState';
+import FilterChip from '@/components/explore/FilterChip';
+import QuickSearches from '@/components/explore/QuickSearches';
+import SearchBar from '@/components/explore/SearchBar';
+import SearchStats from '@/components/explore/SearchStats';
+import PropertyCard from '@/components/property/PropertyCard';
+import { PROPERTIES } from '@/constants/data';
 import { useTheme } from '@/contexts/ThemeContext';
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { useCallback, useMemo, useState } from 'react';
+import { ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Animated, { FadeInDown, FadeInLeft } from 'react-native-reanimated';
+
+const FILTERS = [
+  { id: 'all', label: 'All', icon: 'grid-outline' },
+  { id: 'price-low', label: 'Price: Low to High', icon: 'arrow-down-outline' },
+  { id: 'price-high', label: 'Price: High to Low', icon: 'arrow-up-outline' },
+  { id: 'rating', label: 'Top Rated', icon: 'star-outline' },
+  { id: 'new', label: 'New Listings', icon: 'sparkles-outline' },
+];
 
 export default function ExploreScreen() {
   const { theme, isDarkMode } = useTheme();
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState('all');
+  const [shouldFocus, setShouldFocus] = useState(false);
+
+  // Auto-focus search bar when screen comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      setShouldFocus(true);
+      return () => {
+        setShouldFocus(false);
+      };
+    }, [])
+  );
+
+  const filteredProperties = useMemo(() => {
+    let results = [...PROPERTIES];
+
+    
+    if (searchQuery.trim()) { // filtre de recherche
+      const query = searchQuery.toLowerCase();
+      results = results.filter(
+        (property) =>
+          property.title.toLowerCase().includes(query) ||
+          property.location.toLowerCase().includes(query)
+      );
+    }
+
+    switch (selectedFilter) { // logique de tri/filtrage
+      case 'price-low':
+        results.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-high':
+        results.sort((a, b) => b.price - a.price);
+        break;
+      case 'rating':
+        results.sort((a, b) => b.rating - a.rating);
+        break;
+      case 'new':
+        results = results.filter((p) => p.isNew);
+        break;
+      default:
+        break;
+    }
+
+    return results;
+  }, [searchQuery, selectedFilter]);
+
+  const searchStats = useMemo(() => {
+    if (filteredProperties.length === 0) {
+      return { averagePrice: 0, topRating: 0 };
+    }
+    const averagePrice =
+      filteredProperties.reduce((sum, p) => sum + p.price, 0) / filteredProperties.length;
+    const topRating = Math.max(...filteredProperties.map((p) => p.rating));
+    return { averagePrice, topRating };
+  }, [filteredProperties]);
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+  };
+
+  const handleQuickSearch = (query) => {
+    setSearchQuery(query);
+  };
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
-      <Text style={[styles.title, { color: theme.textPrimary }]}>Explore</Text>
-      <Text style={[styles.subtitle, { color: theme.textSecondary }]}>Coming Soon...</Text>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+      >
+        {/* Search Bar */}
+        <SearchBar
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+          onClear={handleClearSearch}
+          shouldFocus={shouldFocus}
+        />
+
+        {/* Filter Chips */}
+        <Animated.View entering={FadeInLeft.delay(200).duration(600).springify()}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.filtersContent}
+            style={styles.filtersContainer}
+          >
+            {FILTERS.map((filter, index) => (
+              <FilterChip
+                key={filter.id}
+                label={filter.label}
+                icon={filter.icon}
+                selected={selectedFilter === filter.id}
+                onPress={() => setSelectedFilter(filter.id)}
+                index={index}
+              />
+            ))}
+          </ScrollView>
+        </Animated.View>
+
+        {/* Quick Searches - Show only when no search query */}
+        {!searchQuery.trim() && <QuickSearches onSelect={handleQuickSearch} />}
+
+        {/* Search Statistics */}
+        {searchQuery.trim() && filteredProperties.length > 0 && (
+          <SearchStats
+            count={filteredProperties.length}
+            averagePrice={searchStats.averagePrice}
+            topRating={searchStats.topRating}
+          />
+        )}
+
+        {/* Results Counter */}
+        {searchQuery.trim() && (
+          <Animated.View
+            entering={FadeInDown.delay(300).duration(600).springify()}
+            style={styles.resultsContainer}
+          >
+            <Text style={[styles.resultsText, { color: theme.textSecondary }]}>
+              {filteredProperties.length} {filteredProperties.length === 1 ? 'result' : 'results'} found
+            </Text>
+            {(searchQuery.trim() || selectedFilter !== 'all') && (
+              <TouchableOpacity
+                onPress={() => {
+                  setSearchQuery('');
+                  setSelectedFilter('all');
+                }}
+                style={[styles.resetButton, { backgroundColor: theme.surface }]}
+              >
+                <Ionicons name="refresh-outline" size={16} color={theme.primary} />
+                <Text style={[styles.resetText, { color: theme.primary }]}>Reset</Text>
+              </TouchableOpacity>
+            )}
+          </Animated.View>
+        )}
+
+        {/* Properties Grid or Empty State */}
+        {filteredProperties.length > 0 ? (
+          <View style={styles.propertiesSection}>
+            {searchQuery.trim() && (
+              <Animated.View
+                entering={FadeInDown.delay(400).duration(600).springify()}
+                style={styles.sectionHeader}
+              >
+                <Text style={[styles.sectionTitle, { color: theme.textPrimary }]}>
+                  Search Results
+                </Text>
+              </Animated.View>
+            )}
+            <View style={styles.propertiesGrid}>
+              {filteredProperties.map((property, index) => (
+                <PropertyCard key={property.id} property={property} index={index} />
+              ))}
+            </View>
+          </View>
+        ) : (
+          <EmptyState searchQuery={searchQuery} />
+        )}
+      </ScrollView>
     </View>
   );
 }
@@ -16,15 +192,61 @@ export default function ExploreScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+  },
+  placeholder: {
+    width: 40,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingTop: 80,
+    paddingBottom: 100,
+  },
+  filtersContainer: {
+    marginBottom: 20,
+  },
+  filtersContent: {
+    paddingHorizontal: 20,
+  },
+  resultsContainer: {
+    paddingHorizontal: 20,
+    marginBottom: 20,
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  title: {
-    fontSize: 32,
+  resultsText: {
+    fontSize: 15,
+    fontWeight: '600',
+  },
+  resetButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+    gap: 6,
+  },
+  resetText: {
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  propertiesSection: {
+    paddingHorizontal: 20,
+  },
+  sectionHeader: {
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 22,
     fontWeight: '700',
-    marginBottom: 8,
+    letterSpacing: -0.5,
   },
-  subtitle: {
-    fontSize: 18,
+  propertiesGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 16,
+    justifyContent: 'space-between',
   },
 });
