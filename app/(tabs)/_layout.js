@@ -32,10 +32,27 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="reviews"
+        options={{
+          title: 'Reviews',
+          tabBarIcon: ({ color }) => <Ionicons name="chatbubbles" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="settings"
         options={{
           title: 'Settings',
           tabBarIcon: ({ color }) => <Ionicons name="settings" size={24} color={color} />,
+        }}
+      />
+      
+      
+      <Tabs.Screen
+        name="(sandbox)"
+        options={{
+          title: 'Sandbox',
+          //href: null, // Cache cette route de la tab bar
+          tabBarIcon: ({ color }) => <Ionicons name="flask" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
@@ -43,14 +60,6 @@ export default function TabLayout() {
         options={{
           href: null, // Cache cette route de la tab bar
           presentation: 'modal',
-        }}
-      />
-      <Tabs.Screen
-        name="(sandbox)"
-        options={{
-          title: 'Sandbox',
-          //href: null, // Cache cette route de la tab bar
-          tabBarIcon: ({ color }) => <Ionicons name="flask" size={24} color={color} />,
         }}
       />
     </Tabs>

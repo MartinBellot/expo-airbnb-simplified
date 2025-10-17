@@ -34,16 +34,17 @@ export default function Header() {
           
           <View style={styles.rightContainer}>
             <ThemeToggleButton style={styles.themeButton} />
-            <TouchableOpacity style={styles.profileButton}>
+            <TouchableOpacity 
+              style={styles.profileButton}
+              onPress={() => router.push('/profile')}
+            >
               <Ionicons name="person-circle-outline" size={32} color={theme.textPrimary} />
             </TouchableOpacity>
           </View>
         </View>
 
-
         <View style={{ height: 20 }} />
-        
-
+  
       </BlurView>
     </Animated.View>
   );

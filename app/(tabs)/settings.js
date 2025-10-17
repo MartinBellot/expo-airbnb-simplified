@@ -1,10 +1,12 @@
 import { useTheme } from '@/contexts/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { Platform, ScrollView, StatusBar, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
 export default function SettingsScreen() {
   const { theme, isDarkMode, toggleTheme } = useTheme();
+  const router = useRouter();
 
   const SettingItem = ({ icon, title, subtitle, onPress, showArrow = true, rightComponent }) => (
     <TouchableOpacity
@@ -82,7 +84,7 @@ export default function SettingsScreen() {
             icon="person-outline"
             title="Profile"
             subtitle="Manage your account"
-            onPress={() => console.log('Profile')}
+            onPress={() => router.push('/profile')}
           />
           
           <SettingItem
