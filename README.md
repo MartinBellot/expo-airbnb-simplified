@@ -7,7 +7,7 @@
 
 ---
 
-## ✨ Fonctionnalités Principales
+## Fonctionnalités Principales
 
 ### 🏡 Gestion des Propriétés
 - **API Intégrée** - Récupération de données réelles depuis une API REST
@@ -27,7 +27,7 @@
 - **Drawer Navigation** - Menu latéral pour accès rapide
 - **Modal Navigation** - Fenêtres modales pour les actions importantes
 
-### 🛠️ Fonctionnalités Avancées
+### 🛠️ SANDBOX
 - **Caméra** - Intégration de la caméra native
 - **Géolocalisation** - Accès à la position de l'utilisateur
 - **TodoList** - Exemple de gestion de tâches
@@ -75,7 +75,7 @@ npm run web
 
 ```
 AIRBNB_LIKE/
-├── app/                              # Écrans de l'application (Expo Router)
+├── app/                             # Écrans de l'application (Expo Router)
 │   ├── _layout.js                   # Layout racine avec ThemeProvider
 │   └── (tabs)/                      # Navigation par onglets
 │       ├── _layout.js               # Layout des tabs
@@ -96,10 +96,10 @@ AIRBNB_LIKE/
 │               ├── stack/           # Navigation stack
 │               └── tabs/            # Navigation tabs
 │
-├── components/                      # Composants réutilisables
+├── components/                     # Composants réutilisables
 │   ├── common/                     # Composants communs
 │   │   ├── Header.js               # Header avec effet glassmorphism
-│   │   └── ThemeToggleButton.js   # Bouton de changement de thème
+│   │   └── ThemeToggleButton.js    # Bouton de changement de thème
 │   ├── explore/                    # Composants page Explore
 │   │   ├── EmptyState.js           # État vide
 │   │   ├── FilterChip.js           # Chips de filtre
@@ -114,20 +114,20 @@ AIRBNB_LIKE/
 │       ├── PropertyCard.js         # Carte de propriété
 │       └── PropertyDetail.js       # Détails complets
 │
-├── constants/                       # Constantes de l'app
+├── constants/                      # Constantes de l'app
 │   ├── colors.js                   # Système de couleurs (DARK/LIGHT_THEME)
 │   └── data.js                     # Données de démo (catégories)
 │
-├── contexts/                        # Contextes React
+├── contexts/                       # Contextes React
 │   └── ThemeContext.js             # Gestion du thème global
 │
-├── stores/                          # Stores Zustand
+├── stores/                         # Stores Zustand
 │   ├── PropertyStore.js            # Store des propriétés (API, search, filter)
 │   └── TaskStore.js                # Store des tâches (TodoList)
 │
-├── utils/                           # Utilitaires
+├── utils/                          # Utilitaires
 │
-├── assets/                          # Ressources statiques
+├── assets/                         # Ressources statiques
 │   └── images/                     # Images et icônes
 │
 ├── app.json                        # Configuration Expo
@@ -375,8 +375,8 @@ npm run reset-project    # Réinitialise le projet
 ## 👨‍💻 Auteur
 
 **Martin Bellot**  
-Projet réalisé dans le cadre du cours React Native  
-École Supérieure  
+Projet réalisé dans le cadre d'un cours React Native  
+École Supérieure
 
 ---
 
@@ -386,7 +386,4 @@ Ce projet est à usage éducatif. N'hésitez pas à l'utiliser pour apprendre ! 
 
 ---
 
-<div align="center">
-  <p>⭐ N'hésitez pas à star ce repo si vous le trouvez utile !</p>
-  <p>Made with ❤️ and ☕</p>
 </div>
