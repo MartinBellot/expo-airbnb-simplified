@@ -322,31 +322,40 @@ Environnement de test avec exemples de :
 
 <div align="center">
 
-### 🏠 Écran Home
-<img src="./docs/screen_home.png" alt="Home Screen" width="250"/>
-
-*Liste des propriétés avec catégories et bannière d'inspiration*
-
----
-
-### 🔍 Écran Explore
-<img src="./docs/screen_explore.png" alt="Explore Screen" width="250"/>
-
-*Recherche avancée avec filtres et statistiques*
-
----
-
-### ⚙️ Écran Settings
-<img src="./docs/screen_settings.png" alt="Settings Screen" width="250"/>
-
-*Paramètres et profil utilisateur avec toggle thème*
-
----
-
-### 🧪 Écran Sandbox
-<img src="./docs/screen_sandbox.png" alt="Sandbox Screen" width="250"/>
-
-*Environnement de test avec exemples de fonctionnalités*
+<table>
+  <tr>
+    <td align="center">
+      <img src="./docs/screen_home.png" alt="Home Screen" width="300"/>
+      <br/>
+      <b>🏠 Écran Home</b>
+      <br/>
+      <i>Liste des propriétés avec catégories</i>
+    </td>
+    <td align="center">
+      <img src="./docs/screen_explore.png" alt="Explore Screen" width="300"/>
+      <br/>
+      <b>🔍 Écran Explore</b>
+      <br/>
+      <i>Recherche avancée avec filtres</i>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./docs/screen_settings.png" alt="Settings Screen" width="300"/>
+      <br/>
+      <b>⚙️ Écran Settings</b>
+      <br/>
+      <i>Paramètres et profil utilisateur</i>
+    </td>
+    <td align="center">
+      <img src="./docs/screen_sandbox.png" alt="Sandbox Screen" width="300"/>
+      <br/>
+      <b>🧪 Écran Sandbox</b>
+      <br/>
+      <i>Environnement de test</i>
+    </td>
+  </tr>
+</table>
 
 </div>
 
