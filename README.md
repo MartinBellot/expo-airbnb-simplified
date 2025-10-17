@@ -7,6 +7,49 @@
 
 ---
 
+## 📱 Screenshots
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="./docs/screen_home.png" alt="Home Screen" width="300"/>
+      <br/>
+      <b>🏠 Écran Home</b>
+      <br/>
+      <i>Liste des propriétés avec catégories</i>
+    </td>
+    <td align="center">
+      <img src="./docs/screen_explore.png" alt="Explore Screen" width="300"/>
+      <br/>
+      <b>🔍 Écran Explore</b>
+      <br/>
+      <i>Recherche avancée avec filtres</i>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./docs/screen_settings.png" alt="Settings Screen" width="300"/>
+      <br/>
+      <b>⚙️ Écran Settings</b>
+      <br/>
+      <i>Paramètres et profil utilisateur</i>
+    </td>
+    <td align="center">
+      <img src="./docs/screen_sandbox.png" alt="Sandbox Screen" width="300"/>
+      <br/>
+      <b>🧪 Écran Sandbox</b>
+      <br/>
+      <i>Environnement de test</i>
+    </td>
+  </tr>
+</table>
+
+</div>
+
+---
+
 ## Fonctionnalités Principales
 
 ### 🏡 Gestion des Propriétés
@@ -315,49 +358,6 @@ Environnement de test avec exemples de :
 - TodoList avec Zustand
 - Compteur avec animations
 - Tous types de navigation
-
----
-
-## 📱 Screenshots
-
-<div align="center">
-
-<table>
-  <tr>
-    <td align="center">
-      <img src="./docs/screen_home.png" alt="Home Screen" width="300"/>
-      <br/>
-      <b>🏠 Écran Home</b>
-      <br/>
-      <i>Liste des propriétés avec catégories</i>
-    </td>
-    <td align="center">
-      <img src="./docs/screen_explore.png" alt="Explore Screen" width="300"/>
-      <br/>
-      <b>🔍 Écran Explore</b>
-      <br/>
-      <i>Recherche avancée avec filtres</i>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="./docs/screen_settings.png" alt="Settings Screen" width="300"/>
-      <br/>
-      <b>⚙️ Écran Settings</b>
-      <br/>
-      <i>Paramètres et profil utilisateur</i>
-    </td>
-    <td align="center">
-      <img src="./docs/screen_sandbox.png" alt="Sandbox Screen" width="300"/>
-      <br/>
-      <b>🧪 Écran Sandbox</b>
-      <br/>
-      <i>Environnement de test</i>
-    </td>
-  </tr>
-</table>
-
-</div>
 
 ---
 
