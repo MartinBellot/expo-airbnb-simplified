@@ -4,8 +4,8 @@ import InspirationBanner from '@/components/home/InspirationBanner';
 import PropertyCard from '@/components/property/PropertyCard';
 import { useTheme } from '@/contexts/ThemeContext';
 import { usePropertyStore } from '@/stores/PropertyStore';
-import { useState } from 'react';
-import { ActivityIndicator, Platform, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useCallback, useState } from 'react';
+import { ActivityIndicator, RefreshControl, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
 export default function HomeScreen() {
@@ -16,6 +16,13 @@ export default function HomeScreen() {
   const properties = usePropertyStore((state) => state.properties);
   const isLoading = usePropertyStore((state) => state.isLoading);
   const error = usePropertyStore((state) => state.error);
+  const fetchProperties = usePropertyStore((state) => state.fetchProperties);
+
+  // Gestion du refresh
+  const onRefresh = useCallback(() => {
+    fetchProperties();
+  }, [fetchProperties]);
+
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
@@ -28,15 +35,21 @@ export default function HomeScreen() {
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoading}
+            onRefresh={onRefresh}
+            tintColor={theme.primary}
+            colors={[theme.primary]}
+            progressBackgroundColor={theme.surface}
+          />
+        }
       >
-        {/* SIZEDBOX:*/}
-        <View style={{ height: 30 }} />
-        {/* Inspiration Banner Component */}
+
         <InspirationBanner />
 
         <View style={{ height: 50 }} />
 
-        {/* Categories Component */}
         <CategoryList 
           selectedCategory={selectedCategory}
           onSelectCategory={setSelectedCategory}
@@ -96,7 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingTop: Platform.OS === 'ios' ? 180 : 150,
+    paddingTop: 150,
     paddingBottom: 100,
   },
   propertiesSection: {

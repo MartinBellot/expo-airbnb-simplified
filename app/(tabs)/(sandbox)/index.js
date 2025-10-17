@@ -59,14 +59,26 @@ export default function SandboxScreen() {
       icon: 'list',
       route: '/(sandbox)/todolist',
     },
+    {
+      title: 'Caméra Expo',
+      description: 'Accès à la caméra de l\'appareil avec Expo Camera',
+      icon: 'camera',
+      route: '/(sandbox)/camera',
+    },
+    {
+      title: 'Géolocalisation Expo',
+      description: 'Accès à la localisation de l\'appareil avec Expo Location',
+      icon: 'location',
+      route: '/(sandbox)/location',
+    },
   ];
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Essais Navigation</Text>
+        <Text style={styles.title}>SANDBOX</Text>
         <Text style={styles.subtitle}>
-          Tous les types de navigation de REACT expo
+          Exercices Sandbox
         </Text>
       </View>
 

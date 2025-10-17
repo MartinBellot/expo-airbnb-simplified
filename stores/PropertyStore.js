@@ -1,9 +1,9 @@
 import { create } from 'zustand';
 
-const API_URL = 'https://ondes.space/react_data.json';
+const API_URL = 'https://ondes.space/reactdata.json';
 
 export const usePropertyStore = create((set, get) => ({
-  // État
+  // États initiaux
   properties: [],
   isLoading: false,
   error: null,
@@ -13,6 +13,8 @@ export const usePropertyStore = create((set, get) => ({
     set({ isLoading: true, error: null });
     try {
       const response = await fetch(API_URL);
+      console.log('Fetching properties from API:', API_URL);
+      console.log('Response status:', response.status);
       if (!response.ok) {
         throw new Error('Erreur lors du chargement des propriétés');
       }
@@ -31,7 +33,7 @@ export const usePropertyStore = create((set, get) => ({
     }
   },
 
-  searchProperties: (query) => { //par texte
+  searchProperties: (query) => { //recherche par texte
     const { properties } = get();
     if (!query.trim()) {
       return properties;

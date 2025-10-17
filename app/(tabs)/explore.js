@@ -9,7 +9,7 @@ import { usePropertyStore } from '@/stores/PropertyStore';
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { ActivityIndicator, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, RefreshControl, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown, FadeInLeft } from 'react-native-reanimated';
 
 const FILTERS = [
@@ -32,6 +32,12 @@ export default function ExploreScreen() {
   const calculateStats = usePropertyStore((state) => state.calculateStats);
   const isLoading = usePropertyStore((state) => state.isLoading);
   const error = usePropertyStore((state) => state.error);
+  const fetchProperties = usePropertyStore((state) => state.fetchProperties);
+
+  // Gestion du refresh
+  const onRefresh = useCallback(() => {
+    fetchProperties();
+  }, [fetchProperties]);
 
   // Auto-focus search bar when screen comes into focus
   useFocusEffect(
@@ -69,6 +75,15 @@ export default function ExploreScreen() {
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoading}
+            onRefresh={onRefresh}
+            tintColor={theme.primary}
+            colors={[theme.primary]}
+            progressBackgroundColor={theme.surface}
+          />
+        }
       >
         {/* Search Bar */}
         <SearchBar

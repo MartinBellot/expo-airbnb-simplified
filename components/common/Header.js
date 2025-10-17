@@ -40,31 +40,10 @@ export default function Header() {
           </View>
         </View>
 
-        <TouchableOpacity 
-          style={styles.searchContainer}
-          onPress={() => router.push('/(tabs)/explore')}
-          activeOpacity={0.7}
-        >
-          <View style={[
-            styles.searchBar, 
-            { 
-              backgroundColor: theme.surface, 
-              borderColor: theme.border 
-            }
-          ]}>
-            <Ionicons name="search" size={20} color={theme.textSecondary} />
-            <Text style={[styles.searchPlaceholder, { color: theme.textSecondary }]}>
-              Where to?
-            </Text>
-            <View style={[styles.filterButton, { backgroundColor: theme.primary }]}>
-              <Ionicons 
-                name="options-outline" 
-                size={18} 
-                color={isDarkMode ? theme.textPrimary : '#FFFFFF'} 
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
+
+        <View style={{ height: 20 }} />
+        
+
       </BlurView>
     </Animated.View>
   );
