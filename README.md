@@ -318,6 +318,40 @@ Environnement de test avec exemples de :
 
 ---
 
+## 📱 Screenshots
+
+<div align="center">
+
+### 🏠 Écran Home
+<img src="./docs/screen_home.png" alt="Home Screen" width="250"/>
+
+*Liste des propriétés avec catégories et bannière d'inspiration*
+
+---
+
+### 🔍 Écran Explore
+<img src="./docs/screen_explore.png" alt="Explore Screen" width="250"/>
+
+*Recherche avancée avec filtres et statistiques*
+
+---
+
+### ⚙️ Écran Settings
+<img src="./docs/screen_settings.png" alt="Settings Screen" width="250"/>
+
+*Paramètres et profil utilisateur avec toggle thème*
+
+---
+
+### 🧪 Écran Sandbox
+<img src="./docs/screen_sandbox.png" alt="Sandbox Screen" width="250"/>
+
+*Environnement de test avec exemples de fonctionnalités*
+
+</div>
+
+---
+
 ## 🎨 Commandes Utiles
 
 ```bash
