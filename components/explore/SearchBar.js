@@ -1,6 +1,7 @@
 import { useTheme } from '@/contexts/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
+import * as Haptics from 'expo-haptics';
 import { useEffect, useRef } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
@@ -17,6 +18,10 @@ export default function SearchBar({ value, onChangeText, onClear, shouldFocus = 
       }, 300);
     }
   }, [shouldFocus]);
+
+  const handleFocus = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  };
 
   return (
     <Animated.View 
@@ -37,6 +42,7 @@ export default function SearchBar({ value, onChangeText, onClear, shouldFocus = 
             placeholderTextColor={theme.textSecondary}
             value={value}
             onChangeText={onChangeText}
+            onFocus={handleFocus}
             returnKeyType="search"
             clearButtonMode="never"
           />

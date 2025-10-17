@@ -4,12 +4,12 @@ import QuickSearches from '@/components/explore/QuickSearches';
 import SearchBar from '@/components/explore/SearchBar';
 import SearchStats from '@/components/explore/SearchStats';
 import PropertyCard from '@/components/property/PropertyCard';
-import { PROPERTIES } from '@/constants/data';
 import { useTheme } from '@/contexts/ThemeContext';
+import { usePropertyStore } from '@/stores/PropertyStore';
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown, FadeInLeft } from 'react-native-reanimated';
 
 const FILTERS = [
@@ -27,6 +27,12 @@ export default function ExploreScreen() {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [shouldFocus, setShouldFocus] = useState(false);
 
+  // Récupération depuis le store
+  const searchAndFilter = usePropertyStore((state) => state.searchAndFilter);
+  const calculateStats = usePropertyStore((state) => state.calculateStats);
+  const isLoading = usePropertyStore((state) => state.isLoading);
+  const error = usePropertyStore((state) => state.error);
+
   // Auto-focus search bar when screen comes into focus
   useFocusEffect(
     useCallback(() => {
@@ -37,48 +43,15 @@ export default function ExploreScreen() {
     }, [])
   );
 
+  // Utilise le store pour rechercher et filtrer les propriétés
   const filteredProperties = useMemo(() => {
-    let results = [...PROPERTIES];
+    return searchAndFilter(searchQuery, selectedFilter);
+  }, [searchQuery, selectedFilter, searchAndFilter]);
 
-    
-    if (searchQuery.trim()) { // filtre de recherche
-      const query = searchQuery.toLowerCase();
-      results = results.filter(
-        (property) =>
-          property.title.toLowerCase().includes(query) ||
-          property.location.toLowerCase().includes(query)
-      );
-    }
-
-    switch (selectedFilter) { // logique de tri/filtrage
-      case 'price-low':
-        results.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-high':
-        results.sort((a, b) => b.price - a.price);
-        break;
-      case 'rating':
-        results.sort((a, b) => b.rating - a.rating);
-        break;
-      case 'new':
-        results = results.filter((p) => p.isNew);
-        break;
-      default:
-        break;
-    }
-
-    return results;
-  }, [searchQuery, selectedFilter]);
-
+  // Calcul des statistiques
   const searchStats = useMemo(() => {
-    if (filteredProperties.length === 0) {
-      return { averagePrice: 0, topRating: 0 };
-    }
-    const averagePrice =
-      filteredProperties.reduce((sum, p) => sum + p.price, 0) / filteredProperties.length;
-    const topRating = Math.max(...filteredProperties.map((p) => p.rating));
-    return { averagePrice, topRating };
-  }, [filteredProperties]);
+    return calculateStats(filteredProperties);
+  }, [filteredProperties, calculateStats]);
 
   const handleClearSearch = () => {
     setSearchQuery('');
@@ -132,7 +105,7 @@ export default function ExploreScreen() {
         {/* Search Statistics */}
         {searchQuery.trim() && filteredProperties.length > 0 && (
           <SearchStats
-            count={filteredProperties.length}
+            count={searchStats.totalCount}
             averagePrice={searchStats.averagePrice}
             topRating={searchStats.topRating}
           />
@@ -163,7 +136,20 @@ export default function ExploreScreen() {
         )}
 
         {/* Properties Grid or Empty State */}
-        {filteredProperties.length > 0 ? (
+        {isLoading ? (
+          <View style={styles.centerContent}>
+            <ActivityIndicator size="large" color={theme.primary} />
+            <Text style={[styles.loadingText, { color: theme.textSecondary }]}>
+              Chargement des propriétés...
+            </Text>
+          </View>
+        ) : error ? (
+          <View style={styles.centerContent}>
+            <Text style={[styles.errorText, { color: theme.error || '#ff4444' }]}>
+              ⚠️ {error}
+            </Text>
+          </View>
+        ) : filteredProperties.length > 0 ? (
           <View style={styles.propertiesSection}>
             {searchQuery.trim() && (
               <Animated.View
@@ -248,5 +234,21 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 16,
     justifyContent: 'space-between',
+  },
+  centerContent: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 60,
+    paddingHorizontal: 20,
+  },
+  loadingText: {
+    marginTop: 12,
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  errorText: {
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
   },
 });

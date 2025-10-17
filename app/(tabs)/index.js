@@ -2,15 +2,20 @@ import Header from '@/components/common/Header';
 import CategoryList from '@/components/home/CategoryList';
 import InspirationBanner from '@/components/home/InspirationBanner';
 import PropertyCard from '@/components/property/PropertyCard';
-import { PROPERTIES } from '@/constants/data';
 import { useTheme } from '@/contexts/ThemeContext';
+import { usePropertyStore } from '@/stores/PropertyStore';
 import { useState } from 'react';
-import { Platform, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Platform, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
 export default function HomeScreen() {
   const [selectedCategory, setSelectedCategory] = useState('1');
   const { theme, isDarkMode } = useTheme();
+  
+  // Récupération des propriétés depuis le store
+  const properties = usePropertyStore((state) => state.properties);
+  const isLoading = usePropertyStore((state) => state.isLoading);
+  const error = usePropertyStore((state) => state.error);
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
@@ -51,15 +56,31 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </Animated.View>
 
-          <View style={styles.propertiesGrid}>
-            {PROPERTIES.map((property, index) => (
-              <PropertyCard 
-                key={property.id}
-                property={property}
-                index={index}
-              />
-            ))}
-          </View>
+          {/* Gestion des états de chargement et d'erreur */}
+          {isLoading ? (
+            <View style={styles.centerContent}>
+              <ActivityIndicator size="large" color={theme.primary} />
+              <Text style={[styles.loadingText, { color: theme.textSecondary }]}>
+                Chargement des propriétés...
+              </Text>
+            </View>
+          ) : error ? (
+            <View style={styles.centerContent}>
+              <Text style={[styles.errorText, { color: theme.error || '#ff4444' }]}>
+                ⚠️ {error}
+              </Text>
+            </View>
+          ) : (
+            <View style={styles.propertiesGrid}>
+              {properties.map((property, index) => (
+                <PropertyCard 
+                  key={property.id}
+                  property={property}
+                  index={index}
+                />
+              ))}
+            </View>
+          )}
         </View>
 
       </ScrollView>
@@ -101,5 +122,20 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 16,
     justifyContent: 'space-between',
+  },
+  centerContent: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 40,
+  },
+  loadingText: {
+    marginTop: 12,
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  errorText: {
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
   },
 });
